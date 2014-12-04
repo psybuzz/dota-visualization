@@ -6,11 +6,34 @@
 $overview = $('#overview');
 $playerView = $('#playerView');
 $('#leader').click(openOverview);
+var injected = false;
+
+// Onload, direct us to the detailed view if there is a hash specified.
+if (window.location.hash.length > 1){
+	var x = window.location.hash;
+	x = x.replace('#', '').split(',');
+	var playerName = x[0];
+	var hero = x[1];
+
+	// Open the player view.
+	openPlayerView({
+		Player: x[0],
+		Hero: x[1]
+	});
+}
 
 function openPlayerView (player){
-	var script = document.createElement('script');
-	script.src = "http://x3dom.org/x3dom/dist/x3dom-full.js";
-	document.body.appendChild(script);
+	if (!injected){
+		var script = document.createElement('script');
+		script.src = "http://x3dom.org/x3dom/dist/x3dom-full.js";
+		document.body.appendChild(script);
+
+		injected = true;
+	} else {
+		// Do a janky hash-directed refresh.
+		window.location.href = '#'+player.Player+','+player.Hero;
+		window.location.reload();
+	}
 
 	// Launch 3D plot.
 	$('#plot').html('');
