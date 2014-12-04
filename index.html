@@ -12,24 +12,26 @@
 	<body>
 		<div class="leader">CS467</div>
 		<h2 class="title">Some dota visualization</h2>
-		<div id="content">
+		<div id="overview">
 			<h2 id="firstTeamLabel" class="teamLabel"></h2>
 			<div id="firstTeam" class="teamContainer"></div>
 			<h2 id="secondTeamLabel" class="teamLabel"></h2>
 			<div id="secondTeam" class="teamContainer"></div>
 		</div>
 		<p class="description">Cool data.</p>
-
-        <div id="plot"></div>
+		<div id="playerView">
+        	<div id="plot"></div>
+        	<div id="movementContainer"></div>
+		</div>
 
 		<script src="js/d3.min.js"></script>
 		<script src="js/underscore.js"></script>
 		<script src="js/special.js"></script>
-		<script src="js/app.js"></script>
-		<script src="js/playerCircles.js"></script>
-		<script src="graph.js"></script>
         <script src="js/3dplot.js"></script>
         <script type="text/javascript" src="http://x3dom.org/x3dom/dist/x3dom-full.js"></script>
+		<script src="js/playerCircles.js"></script>
+		<script src="graph.js"></script>
+		<script src="js/app.js"></script>
 
 	</body>
 </html>

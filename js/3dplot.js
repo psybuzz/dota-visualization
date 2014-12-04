@@ -244,7 +244,7 @@ function plot3d(parent) {
     //plotData(defaultDuration, 'assists');
     //setInterval( updateData, defaultDuration );
 }
-d3.select('html').style('height','100%').style('width','100%');
-d3.select('body').style('height','100%').style('width','100%');
-d3.select('#plot').style('width', "600px").style('height', "600px")
-plot3d(d3.select('#plot'));
+// d3.select('html').style('height','100%').style('width','100%');
+// d3.select('body').style('height','100%').style('width','100%');
+// d3.select('#plot').style('width', "600px").style('height', "600px")
+// plot3d(d3.select('#plot'));

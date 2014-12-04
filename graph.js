@@ -32,7 +32,7 @@ function drawGraph(hero, team) {
       .x(function(d) { return x(parseFloat(d.Time)); })
       .y(function(d) { return y(d.distance); });
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("#movementContainer").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .attr("font-size", 10)
@@ -99,4 +99,3 @@ function drawGraph(hero, team) {
         .attr("d", line);
   });
 }
-drawGraph("Natures Prophet","Dire")
