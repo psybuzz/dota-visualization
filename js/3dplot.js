@@ -45,7 +45,7 @@ function plot3d(parent) {
     function initializePlot() {
         initializeAxis(0, 15);
         initializeAxis(1, 20);
-        initializeAxis(2, 15);
+        initializeAxis(2, 15); 
     }
 
     function initializeAxis( axisIndex, axisLength )
@@ -183,6 +183,7 @@ function plot3d(parent) {
         var sphereRadius = 0.6;
 
         // Draw a sphere at each x,y,z coordinate.
+        console.log(rows)
         var datapoints = scene.selectAll(".datapoint").data( rows );
         datapoints.exit().remove()
 
@@ -244,7 +245,11 @@ function plot3d(parent) {
     //plotData(defaultDuration, 'assists');
     //setInterval( updateData, defaultDuration );
 }
-// d3.select('html').style('height','100%').style('width','100%');
-// d3.select('body').style('height','100%').style('width','100%');
-// d3.select('#plot').style('width', "600px").style('height', "600px")
-// plot3d(d3.select('#plot'));
+
+function launch3DPlot (){
+    d3.select('html').style('height','100%').style('width','100%');
+    d3.select('body').style('height','100%').style('width','100%');
+    d3.select('#plot').style('width', "600px").style('height', "600px")
+    plot3d(d3.select('#plot'));
+}
+
