@@ -23,33 +23,34 @@ body{
 	margin: 0px 0px 10px 0px;
 }
 
-.cover{
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: black;
-	z-index: -1;
-}
-
 #content{
-	border: 1px solid gray;
 	width: 100%;
-	height: 100%;
 	padding: 10px;
 }
 
-.bar{
-	background-color: brown;
-	margin: 5px;
-	color: white;
-	padding: 3px 8px;
+.userCircle{
+	overflow: visible;
+	padding: 15px;
+	width: 1px;
+	flex-grow: 1;
 }
-.bar:hover{
-	background-color: maroon;
+
+.teamLabel{
+	color: rgb(30,30,30);
+	border-top: 1px solid gray;
+	display: inline-block;
+	padding: 3px 10px;
+	margin-bottom: 10px;
 }
+
+.teamContainer{
+	display: flex;
+}
+
+.clickable{
+	cursor: pointer;
+}
+
 
 @media all and (max-width: 550px){
 	body{
