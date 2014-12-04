@@ -8,7 +8,7 @@ var heroToRoleMap = {
 	"Keeper of the Light": "Support",
 	"Lycan": "Carry",
 	"Morphling": "Mid",
-	"Io": "Suport",
+	"Io": "Support",
 	"Natures Prophet": "Offlane",
 	"Dazzle": "Support",
 	"Lone Druid": "Carry",
