@@ -43,9 +43,9 @@ function plot3d(parent, playerName) {
 
     // Initialize the axes lines and labels.
     function initializePlot() {
-        initializeAxis(0, 15);
+        initializeAxis(0, 20);
         initializeAxis(1, 20);
-        initializeAxis(2, 15); 
+        initializeAxis(2, 30);
     }
 
     function initializeAxis( axisIndex, axisLength )
