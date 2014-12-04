@@ -13,7 +13,7 @@ function openPlayerView (player){
 	document.body.appendChild(script);
 
 	// Launch 3D plot.
-	launch3DPlot();
+	launch3DPlot(playerName);
 
 	var heroToSideMap = {
 		"Puck": "Radiant",

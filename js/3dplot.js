@@ -1,4 +1,4 @@
-function plot3d(parent) {
+function plot3d(parent, playerName) {
     var x3d = parent
         .append("x3d")
         .attr( "width", parseInt(parent.style("width"))+"px" )
@@ -13,7 +13,7 @@ function plot3d(parent) {
         .attr( "orientation", [-0.5, 1, 0.2, 1.12*Math.PI/4])
         .attr( "position", [8, 4, 15])
 
-    var rows = initializeDataGrid();
+    var rows = initializeDataGrid(playerName);
     var axisRange = [0, 20];
     var scales = [];
     var initialDuration = 0;
@@ -43,9 +43,9 @@ function plot3d(parent) {
 
     // Initialize the axes lines and labels.
     function initializePlot() {
-        initializeAxis(0, 15);
+        initializeAxis(0, 20);
         initializeAxis(1, 20);
-        initializeAxis(2, 15); 
+        initializeAxis(2, 30);
     }
 
     function initializeAxis( axisIndex, axisLength )
@@ -209,7 +209,7 @@ function plot3d(parent) {
     }
 
     //function that gets the data points.
-    function initializeDataGrid() {
+    function initializeDataGrid(playerName) {
         var rows = [];
         // Follow the convention where y(x,z) is elevation.
        /* for (var x=0; x<=15; x+=1) {
@@ -217,25 +217,19 @@ function plot3d(parent) {
                 rows.push({Deaths: x, Kills: 1, Assists: z});
             }
         }*/
-        rows.push({Deaths: 8, Kills: 0, Assists: 0});
-        rows.push({Deaths: 0, Kills: 5, Assists: 0});
-        rows.push({Deaths: 0, Kills: 0, Assists: 7});
+        var request = new XMLHttpRequest();
+        request.open("GET", "json/overallKda.json", false);
+        request.send(null)
+        var json = JSON.parse(request.responseText);
+        if (json[playerName] != null) {
+
+            console.log(playerName);
+            rows.push({Deaths: json[playerName].deaths, Kills: 0, Assists: 0});
+            rows.push({Deaths: 0, Kills: json[playerName].kills, Assists: 0});
+            rows.push({Deaths: 0, Kills: 0, Assists: json[playerName].assists});
+        }
 
         return rows;
-    }
-
-    function updateData() {
-        time += Math.PI/8;
-        if ( x3d.node() && x3d.node().runtime ) {
-            for (var r=0; r<rows.length; ++r) {
-                var x = rows[r].Deaths;
-                var z = rows[r].Assists;
-                rows[r].y = 5*( Math.sin(0.5*x + time) * Math.cos(0.25*z + time));
-            }
-            //plotData( defaultDuration );
-        } else {
-            console.log('x3d not ready.');
-        }
     }
 
     initializeDataGrid();
@@ -246,10 +240,10 @@ function plot3d(parent) {
     //setInterval( updateData, defaultDuration );
 }
 
-function launch3DPlot (){
+function launch3DPlot (playerName){
     d3.select('html').style('height','100%').style('width','100%');
     d3.select('body').style('height','100%').style('width','100%');
     d3.select('#plot').style('width', "600px").style('height', "600px")
-    plot3d(d3.select('#plot'));
+    plot3d(d3.select('#plot'), playerName);
 }
 
