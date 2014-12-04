@@ -241,8 +241,8 @@ function plot3d(parent, playerName) {
 }
 
 function launch3DPlot (playerName){
-    d3.select('html').style('height','100%').style('width','100%');
-    d3.select('body').style('height','100%').style('width','100%');
+    // d3.select('html').style('height','100%').style('width','100%');
+    // d3.select('body').style('height','100%').style('width','100%');
     d3.select('#plot').style('width', "600px").style('height', "600px")
     plot3d(d3.select('#plot'), playerName);
 }

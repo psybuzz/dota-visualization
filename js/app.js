@@ -13,6 +13,7 @@ function openPlayerView (player){
 	document.body.appendChild(script);
 
 	// Launch 3D plot.
+	$('#plot').html('');
 	launch3DPlot(player.Player);
 
 	var heroToSideMap = {
