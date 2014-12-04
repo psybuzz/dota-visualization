@@ -64,7 +64,7 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 				d3.select(this).style("fill", "whitesmoke");
 			})
 			.on('click', function (d){
-				openPlayerView(d.Player);
+				openPlayerView(d);
 			});
 	arcGraphics.append("path")
 			.attr("d", arc.kill)
@@ -100,7 +100,7 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 				d3.select(circle).style("fill", "whitesmoke");
 			})
 			.on('click', function (d){
-				openPlayerView(d.Player);
+				openPlayerView(d);
 			})
 			// .transition()
 			// .delay(function(d,i){ return delay*i+200+offset })
