@@ -3,6 +3,18 @@
  * the overview in the main page.
  */
 
+var heroToRoleMap = {
+	"Puck": "Offlane",
+	"Keeper of the Light": "Support",
+	"Lycan": "Carry",
+	"Morphling": "Mid",
+	"Io": "Suport",
+	"Natures Prophet": "Offlane",
+	"Dazzle": "Support",
+	"Lone Druid": "Carry",
+	"Enigma": "Jungle/Support",
+	"Ember Spirit": "Mid",
+}
 
 var overallKda = d3.csv('overall_kda_617956329.csv', function (data){
 	// Convert KDA strings to numbers.
@@ -108,6 +120,9 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 			.text(function(d){ return d.Player; })
 			.attr("transform", function(d){ return "translate(-"+(d.Player.length*4)+",0)" })
 			.attr("class", "clickable");
+	arcGraphics.append("text")
+			.text(function(d){ return heroToRoleMap[d.Hero]; })
+			.attr("transform", function(d){ return "translate(-"+(arc.radius+10)+",90)" });
 
 	return arcGraphics;
 }
