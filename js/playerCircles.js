@@ -68,21 +68,21 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 			});
 	arcGraphics.append("path")
 			.attr("d", arc.kill)
-			// .transition()
-			// .delay(function(d,i){ return delay*i+offset })
-			// .duration(1000)
+			.transition()
+			.delay(function(d,i){ return delay*i+offset })
+			.duration(1000)
 			.style("fill", function(d) { return 'blue'; });
 	arcGraphics.append("path")
 			.attr("d", arc.death)
-			// .transition()
-			// .delay(function(d,i){ return delay*i+100+offset })
-			// .duration(1000)
+			.transition()
+			.delay(function(d,i){ return delay*i+100+offset })
+			.duration(1000)
 			.style("fill", function(d) { return 'red'; });
 	arcGraphics.append("path")
 			.attr("d", arc.assist)
-			// .transition()
-			// .delay(function(d,i){ return delay*i+200+offset })
-			// .duration(1000)
+			.transition()
+			.delay(function(d,i){ return delay*i+200+offset })
+			.duration(1000)
 			.style("fill", function(d) { return 'green'; });
 	arcGraphics.append("text")
 			.on('mouseover', function (d){
@@ -102,9 +102,9 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 			.on('click', function (d){
 				openPlayerView(d);
 			})
-			// .transition()
-			// .delay(function(d,i){ return delay*i+200+offset })
-			// .duration(200)
+			.transition()
+			.delay(function(d,i){ return delay*i+200+offset })
+			.duration(200)
 			.text(function(d){ return d.Player; })
 			.attr("transform", function(d){ return "translate(-"+(d.Player.length*4)+",0)" })
 			.attr("class", "clickable");
