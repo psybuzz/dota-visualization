@@ -6,7 +6,10 @@
 $overview = $('#overview');
 $playerView = $('#playerView');
 $('#leader').click(openOverview);
-var injected = false;
+var app = {
+	injected: false,
+	view: 'main'
+}
 
 // Onload, direct us to the detailed view if there is a hash specified.
 if (window.location.hash.length > 1){
@@ -23,12 +26,12 @@ if (window.location.hash.length > 1){
 }
 
 function openPlayerView (player){
-	if (!injected){
+	if (!app.injected){
 		var script = document.createElement('script');
 		script.src = "http://x3dom.org/x3dom/dist/x3dom-full.js";
 		document.body.appendChild(script);
 
-		injected = true;
+		app.injected = true;
 	} else {
 		// Do a janky hash-directed refresh.
 		window.location.href = '#'+player.Player+','+player.Hero;
@@ -61,7 +64,9 @@ function openPlayerView (player){
 
 	$overview.fadeOut(function (){
 		$playerView.fadeIn();
+		app.view = 'player';
 	});
+
 }
 
 function openOverview (){
@@ -70,5 +75,7 @@ function openOverview (){
 
 	$playerView.fadeOut(function (){
 		$overview.fadeIn();
+		app.view = 'main';
 	});
+
 }
