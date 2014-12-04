@@ -13,7 +13,7 @@ function openPlayerView (player){
 	document.body.appendChild(script);
 
 	// Launch 3D plot.
-	launch3DPlot(playerName);
+	launch3DPlot(player.Player);
 
 	var heroToSideMap = {
 		"Puck": "Radiant",
@@ -29,6 +29,7 @@ function openPlayerView (player){
 	}
 
 	// Launch graph.
+	$('#movementContainer').html('');
 	drawGraph(player.Hero,heroToSideMap[player.Hero]);
 
 	$('#title').text(player.Player + ' - ' + player.Hero);
