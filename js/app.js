@@ -8,7 +8,7 @@ $playerView = $('#playerView');
 
 function openPlayerView (playerName){
 	var script = document.createElement('script');
-	script.src="http://x3dom.org/x3dom/dist/x3dom-full.js";
+	script.src = "http://x3dom.org/x3dom/dist/x3dom-full.js";
 	document.body.appendChild(script);
 
 	// Launch 3D plot.
