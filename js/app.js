@@ -52,11 +52,24 @@ function openPlayerView (player){
 		"Ember Spirit": "Dire",
 	}
 
+	var heroToRoleMap = {
+		"Puck": "Offlane",
+		"Keeper of the Light": "Support",
+		"Lycan": "Carry",
+		"Morphling": "Mid",
+		"Io": "Suport",
+		"Natures Prophet": "Offlane",
+		"Dazzle": "Support",
+		"Lone Druid": "Carry",
+		"Enigma": "Jungle/Support",
+		"Ember Spirit": "Mid",
+	}
+
 	// Launch graph.
 	$('#movementContainer').html('');
 	drawGraph(player.Hero,heroToSideMap[player.Hero]);
 
-	$('#title').text(player.Player + ' - ' + player.Hero);
+	$('#title').text(player.Player + ' - ' + player.Hero + ' - ' + heroToRoleMap[player.Hero]);
 	$('#leader').text('back');
 
 	$overview.fadeOut(function (){
