@@ -12,7 +12,7 @@ function openPlayerView (playerName){
 	document.body.appendChild(script);
 
 	// Launch 3D plot.
-	launch3DPlot();
+	launch3DPlot(playerName);
 
 	// Launch graph.
 	drawGraph("Natures Prophet","Dire");
