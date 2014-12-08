@@ -26,7 +26,7 @@ body{
   stroke-width: 1.5px;
 }
 
-.leader{
+.leader, .tab.selected{
 	display: inline-block;
 	background-color: lightseagreen;
 	color: white;
@@ -67,15 +67,36 @@ body{
 	overflow: visible;
 	padding: 15px;
 	width: 1px;
-	height: 160px;
+	height: 120px;
 	flex-grow: 1;
 }
 
+.huge{
+	font-size: 80px;
+	font-weight: 100;
+}
+
 #plot{
-    border: 1px solid gray;
+    /*border: 1px solid gray;*/
     width: 350px;
     height: 350px;
     padding: 5px;
+}
+
+.viewTabs{
+	padding-left: 0;
+}
+
+.tab{
+	display: inline-block;
+	background-color: lightgray;
+	color: white;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.tab:hover{
+	background-color: gray;
 }
 
 .bar{
@@ -103,13 +124,35 @@ body{
 	cursor: pointer;
 }
 
-#profilePic{
+#profilePicHolder{
 	position: absolute;
 	top: 80px;
 	right: 0px;
 	opacity: 0.9;
 	z-index: -1;
-	max-width: 25%;
+	width: 25%;
+	height: 450px;
+}
+
+#profilePic{
+	max-width: 100%;
+	max-height: 100%;
+	position: absolute;
+	right: 0;
+}
+
+#profilePicHolder:after{
+	content: "";
+	background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 10%); /* FF3.6+ */
+	background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 10%); /* Chrome10+,Safari5.1+ */
+	background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 10%); /* IE10+ */
+	background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 10%); /* W3C */
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	z-index: 2;
 }
 
 

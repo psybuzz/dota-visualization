@@ -31,7 +31,7 @@ var playerToPictureMap = {
 
 var currentPlayer = null;
 
-var overallKda = d3.csv('overall_kda_617956329.csv', function (data){
+function loadOverview (data){
 	// Convert KDA strings to numbers.
 	data.forEach(function (el){
 		el.K = parseInt(el.K, 10);
@@ -56,8 +56,7 @@ var overallKda = d3.csv('overall_kda_617956329.csv', function (data){
 	// Add circles for the second team.
 	$('#secondTeamLabel').text("Team " + teamNames[1]);
 	var secondTeamGraphics = addTeamCircleGraphics(secondTeam, 2, arc);
-
-});
+}
 
 /**
  * Creates and adds the circle profile graphics for a team into either the first
@@ -71,19 +70,21 @@ var overallKda = d3.csv('overall_kda_617956329.csv', function (data){
  */
 function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 	firstOrSecond = firstOrSecond === 2 ? 'second' : 'first';
-	var offset = firstOrSecond === 'first' ? 0 : 200*4+200;
-	var delay = 100;
+	var offset = firstOrSecond === 'first' ? 0 : 80*4+80;
+	var delay = 90;
 
 	var arcGraphics = d3.select('#'+firstOrSecond+'Team')
 			.selectAll("svg")
 			.data(teamData)
 			.enter().append("svg").attr('class', 'userCircle')
 			.append('g')
-			.attr('transform', function(d,i){ return 'translate('+arc.radius+','+arc.radius+')' });
+	arcGraphics.transition()
+			.delay(function(d,i){ return delay*i })
+			.duration(400)
+			.attr('transform', function(d,i){ return 'translate('+arc.radius+','+(arc.radius)+')' })
 	arcGraphics.append("path")
 			.attr("d", arc.player)
 			.attr("class", "clickable")
-			.style("fill", function(d) { return 'whitesmoke'; })
 			.on('mouseover', function (d){
 				d3.select(this).style("fill", "gray");
 				showPlayerOverview(d);
@@ -95,7 +96,12 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 			.on('click', function (d){
 				hidePlayerOverview();
 				openPlayerView(d);
-			});
+			})
+			.style("fill", function(d) { return 'white'; })
+			.transition()
+			.delay(function(d,i){ return delay*i+offset })
+			.duration(1000)
+			.style("fill", function(d) { return 'whitesmoke'; })
 	arcGraphics.append("path")
 			.on('mouseover', function (d){
 				d3.select(this).style("fill", "gray");
@@ -107,6 +113,7 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 				showKDAStats(d, 'kills');
 			})
 			.attr("d", arc.kill)
+			.style("fill", function(d) { return 'whitesmoke'; })
 			.transition()
 			.delay(function(d,i){ return delay*i+offset })
 			.duration(1000)
@@ -122,6 +129,7 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 				showKDAStats(d, 'deaths');
 			})
 			.attr("d", arc.death)
+			.style("fill", function(d) { return 'whitesmoke'; })
 			.transition()
 			.delay(function(d,i){ return delay*i+100+offset })
 			.duration(1000)
@@ -137,6 +145,7 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 				showKDAStats(d, 'assists');
 			})
 			.attr("d", arc.assist)
+			.style("fill", function(d) { return 'whitesmoke'; })
 			.transition()
 			.delay(function(d,i){ return delay*i+200+offset })
 			.duration(1000)
@@ -223,9 +232,9 @@ function showPlayerOverview (player){
 	currentPlayer = player;
 
 	var image = 'assets/' + playerToPictureMap[player.Player];
-	$('#profilePic').hide()
-			.attr('src', image)
-			.css({
+	$('#profilePicHolder').hide();
+	$('#profilePic').attr('src', image);
+	$('#profilePicHolder').css({
 				'right': '-20px',
 				'opacity': '0'
 			})
@@ -235,11 +244,11 @@ function showPlayerOverview (player){
 				'opacity': '0.9'
 			}, 200);
 
-	var statsHTML = '<h3>Kills: ' + player.K + '</h3>' +
-			'<h3>Deaths: ' + player.D + '</h3>' +
-			'<h3>Assists: ' + player.A + '</h3>';
-	$('#overviewStats').html(statsHTML)
-			.fadeIn();
+	// var statsHTML = '<h3>Kills: ' + player.K + '</h3>' +
+	// 		'<h3>Deaths: ' + player.D + '</h3>' +
+	// 		'<h3>Assists: ' + player.A + '</h3>';
+	// $('#overviewStats').html(statsHTML)
+	// 		.fadeIn();
 }
 
 /**

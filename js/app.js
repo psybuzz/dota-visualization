@@ -11,47 +11,26 @@ var app = {
 	view: 'main'
 }
 
-var heroToSideMap = {
-	"Puck": "Radiant",
-	"Keeper of the Light": "Radiant",
-	"Lycan": "Radiant",
-	"Morphling": "Radiant",
-	"Io": "Radiant",
-	"Natures Prophet": "Dire",
-	"Dazzle": "Dire",
-	"Lone Druid": "Dire",
-	"Enigma": "Dire",
-	"Ember Spirit": "Dire",
-}
+// Load all match data before starting up visualization.
+loadMatchData(function (){
+	// Onload, direct us to the detailed view if there is a hash specified.
+	if (window.location.hash.length > 1){
+		var x = window.location.hash;
+		x = x.replace('#', '').split(',');
+		var playerName = x[0];
+		var hero = x[1];
 
-var heroToRoleMap = {
-	"Puck": "Offlane",
-	"Keeper of the Light": "Support",
-	"Lycan": "Carry",
-	"Morphling": "Mid",
-	"Io": "Suport",
-	"Natures Prophet": "Offlane",
-	"Dazzle": "Support",
-	"Lone Druid": "Carry",
-	"Enigma": "Jungle/Support",
-	"Ember Spirit": "Mid",
-}
-
-// Onload, direct us to the detailed view if there is a hash specified.
-if (window.location.hash.length > 1){
-	var x = window.location.hash;
-	x = x.replace('#', '').split(',');
-	var playerName = x[0];
-	var hero = x[1];
-
-	// Open the player view.
-	if (playerName.length && hero.length){
-		openPlayerView({
-			Player: x[0],
-			Hero: x[1]
-		}, true);
+		// Open the player view.
+		if (playerName.length && hero.length){
+			openPlayerView({
+				Player: x[0],
+				Hero: x[1]
+			}, true);
+		}
 	}
-}
+
+	loadOverview(overallKdaData);
+});
 
 function openPlayerView (player, fromHash){
 	// Put the player name in the title.
@@ -79,13 +58,20 @@ function openPlayerView (player, fromHash){
 			return;
 		}
 
+		// Set the huge name.
+		$('#hugename').text(player.Player);
+
 		// Launch 3D plot.
 		$('#plot').html('');
 		launch3DPlot(player.Player);
 		
 		// Launch graph.
-		$('#movementContainer').html('');
-		drawGraph(player.Hero,heroToSideMap[player.Hero]);
+		$('.graphContainer').html('');
+		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#movementContainer");
+		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#goldContainer", "gold");
+		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#killContainer", "blue");
+		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#deathContainer", "red");
+		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#assistContainer", "green");
 
 		$playerView.fadeIn();
 		app.view = 'player';
