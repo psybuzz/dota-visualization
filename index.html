@@ -11,17 +11,57 @@
 	</head>
 	<body>
 		<div id="leader" class="leader">CS467</div>
-		<h2 id="title" class="title">Some dota visualization</h2>
+		<h2 id="title" class="title">Defense of the Ancients 2 Match Visualization</h2>
+		<div id="profilePicHolder">
+			<img id="profilePic" src="">
+		</div>
 		<div id="overview">
+			<h2 class="gray">Select a player</h2>
+			<br>
+			<div class="leader win">Win</div>
 			<h2 id="firstTeamLabel" class="teamLabel"></h2>
 			<div id="firstTeam" class="teamContainer"></div>
+			<br><br>
+			<div class="leader lose">Lose</div>
 			<h2 id="secondTeamLabel" class="teamLabel"></h2>
 			<div id="secondTeam" class="teamContainer"></div>
+			<div id="overviewStats"></div>
+			<p class="description gray">DoTA 2, or Defense of the Ancients 2, is an online multiplayer game where two teams of five can battle using their heroes to achieve victory.  The data for this visualization comes from datdota.com, in reference to a <a href="http://www.datdota.com/match.php?q=617956329&p=location"> specific match</a> in the StarSeries IX Finals.</p>
 		</div>
-		<p class="description">loading cool data.</p>
 		<div id="playerView">
+			<div class="huge gray" id="hugename"></div>
+			<br><br>
+			<ul class="viewTabs">
+				<li class="tab selected">Charts</li>
+				<li class="tab">Role counterpart comparison</li>
+				<li class="tab">Team comparison</li>
+			</ul>
+			<h2 class="gray">Movement throughout the game</h2>
+        	<div id="movementContainer" class="graphContainer"></div>
+        	<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
+        	<br>
+        	<br>
+        	<h2 class="gray">Gold earned</h2>
+			<div id="goldContainer" class="graphContainer"></div>
+			<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
+        	<br>
+        	<br>
+			<h2 class="gray">Kills</h2>
+			<div id="killContainer" class="graphContainer"></div>
+			<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
+        	<br>
+        	<br>
+			<h2 class="gray">Deaths</h2>
+			<div id="deathContainer" class="graphContainer"></div>
+			<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
+        	<br>
+        	<br>
+			<h2 class="gray">Assists</h2>
+			<div id="assistContainer" class="graphContainer"></div>
+			<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
+        	<br>
+        	<br>
         	<div id="plot"></div>
-        	<div id="movementContainer"></div>
 		</div>
 
 		<script src="js/d3.min.js"></script>
@@ -30,6 +70,7 @@
 		<script src="js/playerCircles.js"></script>
 		<script src="graph.js"></script>
         <script type="text/javascript" src="js/3dplot.js"></script>
+        <script src="js/data.js"></script>
 		<script src="js/app.js"></script>
 
 	</body>
