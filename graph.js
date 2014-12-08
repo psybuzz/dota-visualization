@@ -91,7 +91,7 @@ function drawGraph(hero, team) {
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Price ($)");
+        .text("Units Moved");
 
     svg.append("path")
         .datum(data)
