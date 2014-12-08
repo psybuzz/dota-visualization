@@ -46,7 +46,7 @@ var overallKda = d3.csv('overall_kda_617956329.csv', function (data){
 	var secondTeam = data.filter(function (el){ return el.Team !== teamNames[0] });
 
 	var radius = 35;
-	var thickness = 12;
+	var thickness = 15;
 	var arc = profileArcGenerator(radius, thickness);
 
 	// Add circles for the first team.
@@ -97,23 +97,50 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 				openPlayerView(d);
 			});
 	arcGraphics.append("path")
+			.on('mouseover', function (d){
+				d3.select(this).style("fill", "gray");
+			})
+			.on('mouseout', function (d){
+				d3.select(this).style("fill", "blue");
+			})
+			.on('click', function (d){
+				showKDAStats(d, 'kills');
+			})
 			.attr("d", arc.kill)
 			.transition()
 			.delay(function(d,i){ return delay*i+offset })
 			.duration(1000)
-			.style("fill", function(d) { return 'blue'; });
+			.style("fill", function(d) { return 'blue'; })
 	arcGraphics.append("path")
+			.on('mouseover', function (d){
+				d3.select(this).style("fill", "gray");
+			})
+			.on('mouseout', function (d){
+				d3.select(this).style("fill", "red");
+			})
+			.on('click', function (d){
+				showKDAStats(d, 'deaths');
+			})
 			.attr("d", arc.death)
 			.transition()
 			.delay(function(d,i){ return delay*i+100+offset })
 			.duration(1000)
-			.style("fill", function(d) { return 'red'; });
+			.style("fill", function(d) { return 'red'; })
 	arcGraphics.append("path")
+			.on('mouseover', function (d){
+				d3.select(this).style("fill", "gray");
+			})
+			.on('mouseout', function (d){
+				d3.select(this).style("fill", "green");
+			})
+			.on('click', function (d){
+				showKDAStats(d, 'assists');
+			})
 			.attr("d", arc.assist)
 			.transition()
 			.delay(function(d,i){ return delay*i+200+offset })
 			.duration(1000)
-			.style("fill", function(d) { return 'green'; });
+			.style("fill", function(d) { return 'green'; })
 	arcGraphics.append("text")
 			.on('mouseover', function (d){
 				var circle = this.previousElementSibling
@@ -186,6 +213,11 @@ function profileArcGenerator (radius, thickness){
 	};
 }
 
+/**
+ * Shows the player's profile picture in the overview screen.
+ * 
+ * @param  {Object} player The selected player.
+ */
 function showPlayerOverview (player){
 	if (currentPlayer === player) return;
 	currentPlayer = player;
@@ -210,7 +242,23 @@ function showPlayerOverview (player){
 			.fadeIn();
 }
 
-function hidePlayerOverview (player){
+/**
+ * Hides the player overview stats.
+ */
+function hidePlayerOverview (){
 	$('#overviewStats').fadeOut();
 }
 
+function showKDAStats (player, kda){
+	if (kda === 'kills'){
+
+	} else if (kda === 'deaths'){
+
+	} else if (kda === 'assists'){
+
+	}
+}
+
+function hideKDAStats (){
+
+}

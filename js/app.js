@@ -11,6 +11,32 @@ var app = {
 	view: 'main'
 }
 
+var heroToSideMap = {
+	"Puck": "Radiant",
+	"Keeper of the Light": "Radiant",
+	"Lycan": "Radiant",
+	"Morphling": "Radiant",
+	"Io": "Radiant",
+	"Natures Prophet": "Dire",
+	"Dazzle": "Dire",
+	"Lone Druid": "Dire",
+	"Enigma": "Dire",
+	"Ember Spirit": "Dire",
+}
+
+var heroToRoleMap = {
+	"Puck": "Offlane",
+	"Keeper of the Light": "Support",
+	"Lycan": "Carry",
+	"Morphling": "Mid",
+	"Io": "Suport",
+	"Natures Prophet": "Offlane",
+	"Dazzle": "Support",
+	"Lone Druid": "Carry",
+	"Enigma": "Jungle/Support",
+	"Ember Spirit": "Mid",
+}
+
 // Onload, direct us to the detailed view if there is a hash specified.
 if (window.location.hash.length > 1){
 	var x = window.location.hash;
@@ -19,75 +45,59 @@ if (window.location.hash.length > 1){
 	var hero = x[1];
 
 	// Open the player view.
-	openPlayerView({
-		Player: x[0],
-		Hero: x[1]
-	});
+	if (playerName.length && hero.length){
+		openPlayerView({
+			Player: x[0],
+			Hero: x[1]
+		}, true);
+	}
 }
 
-function openPlayerView (player){
-	if (!app.injected){
-		var script = document.createElement('script');
-		script.src = "http://x3dom.org/x3dom/dist/x3dom-full.js";
-		document.body.appendChild(script);
-
-		app.injected = true;
-
-		// This actually just shows the profile picture.
-		showPlayerOverview(player);
-	} else {
-		// Do a janky hash-directed refresh.
-		window.location.href = '#'+player.Player+','+player.Hero;
-		window.location.reload();
-	}
-
-	// Launch 3D plot.
-	$('#plot').html('');
-	launch3DPlot(player.Player);
-
-	var heroToSideMap = {
-		"Puck": "Radiant",
-		"Keeper of the Light": "Radiant",
-		"Lycan": "Radiant",
-		"Morphling": "Radiant",
-		"Io": "Radiant",
-		"Natures Prophet": "Dire",
-		"Dazzle": "Dire",
-		"Lone Druid": "Dire",
-		"Enigma": "Dire",
-		"Ember Spirit": "Dire",
-	}
-
-	var heroToRoleMap = {
-		"Puck": "Offlane",
-		"Keeper of the Light": "Support",
-		"Lycan": "Carry",
-		"Morphling": "Mid",
-		"Io": "Suport",
-		"Natures Prophet": "Offlane",
-		"Dazzle": "Support",
-		"Lone Druid": "Carry",
-		"Enigma": "Jungle/Support",
-		"Ember Spirit": "Mid",
-	}
-
-	// Launch graph.
-	$('#movementContainer').html('');
-	drawGraph(player.Hero,heroToSideMap[player.Hero]);
-
+function openPlayerView (player, fromHash){
+	// Put the player name in the title.
 	$('#title').text(player.Player + ' - ' + player.Hero + ' - ' + heroToRoleMap[player.Hero]);
 	$('#leader').text('back');
 
-	$overview.fadeOut(function (){
+	// Transition to new view.
+	var duration = fromHash ? 0 : 400;
+	$overview.fadeOut(duration, function (){
+		if (!app.injected){
+			var script = document.createElement('script');
+			script.src = "http://x3dom.org/x3dom/dist/x3dom-full.js";
+			document.body.appendChild(script);
+
+			app.injected = true;
+
+			// This actually just shows the profile picture.
+			showPlayerOverview(player);
+		} else {
+			// If we've already injected, we need a fresh context.  Do a janky
+			// hash-directed refresh.
+			window.location.href = '#'+player.Player+','+player.Hero;
+			window.location.reload();
+
+			return;
+		}
+
+		// Launch 3D plot.
+		$('#plot').html('');
+		launch3DPlot(player.Player);
+		
+		// Launch graph.
+		$('#movementContainer').html('');
+		drawGraph(player.Hero,heroToSideMap[player.Hero]);
+
 		$playerView.fadeIn();
 		app.view = 'player';
 	});
-
 }
 
 function openOverview (){
-	$('#title').text('Some dota visualization');
+	$('#title').text('Defense of the Ancients 2 Match Visualization');
 	$('#leader').text('CS467')
+
+	// Reset the hasher.
+	window.location.href = '#';
 
 	$playerView.fadeOut(function (){
 		$overview.fadeIn();
