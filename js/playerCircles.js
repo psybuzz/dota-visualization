@@ -16,6 +16,21 @@ var heroToRoleMap = {
 	"Ember Spirit": "Mid",
 }
 
+var playerToPictureMap = {
+	"Mushi": "Mushi.jpg",
+	"LaNm": "LaNm.png",
+	"iceiceice": "iceiceice.png",
+	"BurNIng": "burNing.png",
+	"MMY": "mmy.png",
+	"ppd": "ppd.png",
+	"Eternal Envy": "EternalEnvy.jpg",
+	"Universe": "Universe.jpg",
+	"zai": "zai.png",
+	"Arteezy": "Arteezy.jpg",
+}
+
+var currentPlayer = null;
+
 var overallKda = d3.csv('overall_kda_617956329.csv', function (data){
 	// Convert KDA strings to numbers.
 	data.forEach(function (el){
@@ -30,8 +45,8 @@ var overallKda = d3.csv('overall_kda_617956329.csv', function (data){
 	var firstTeam = data.filter(function (el){ return el.Team === teamNames[0] });
 	var secondTeam = data.filter(function (el){ return el.Team !== teamNames[0] });
 
-	var radius = 50;
-	var thickness = 20;
+	var radius = 35;
+	var thickness = 12;
 	var arc = profileArcGenerator(radius, thickness);
 
 	// Add circles for the first team.
@@ -71,11 +86,14 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 			.style("fill", function(d) { return 'whitesmoke'; })
 			.on('mouseover', function (d){
 				d3.select(this).style("fill", "gray");
+				showPlayerOverview(d);
 			})
 			.on('mouseout', function (d){
 				d3.select(this).style("fill", "whitesmoke");
+				// hidePlayerOverview();
 			})
 			.on('click', function (d){
+				hidePlayerOverview();
 				openPlayerView(d);
 			});
 	arcGraphics.append("path")
@@ -112,17 +130,18 @@ function addTeamCircleGraphics (teamData, firstOrSecond, arc){
 				d3.select(circle).style("fill", "whitesmoke");
 			})
 			.on('click', function (d){
+				hidePlayerOverview();
 				openPlayerView(d);
 			})
 			.transition()
 			.delay(function(d,i){ return delay*i+200+offset })
 			.duration(200)
 			.text(function(d){ return d.Player; })
-			.attr("transform", function(d){ return "translate(-"+(d.Player.length*4)+",0)" })
+			.attr("transform", function(d){ return "translate(-"+(d.Player.length*3)+",0)" })
 			.attr("class", "clickable");
 	arcGraphics.append("text")
 			.text(function(d){ return heroToRoleMap[d.Hero]; })
-			.attr("transform", function(d){ return "translate(-"+(arc.radius+10)+",90)" });
+			.attr("transform", function(d){ return "translate(-"+(arc.radius+10)+",64)" });
 
 	return arcGraphics;
 }
@@ -166,3 +185,32 @@ function profileArcGenerator (radius, thickness){
 				.outerRadius(function(d) { return radius; })
 	};
 }
+
+function showPlayerOverview (player){
+	if (currentPlayer === player) return;
+	currentPlayer = player;
+
+	var image = 'assets/' + playerToPictureMap[player.Player];
+	$('#profilePic').hide()
+			.attr('src', image)
+			.css({
+				'right': '-20px',
+				'opacity': '0'
+			})
+			.show()
+			.animate({
+				'right': '0px',
+				'opacity': '0.9'
+			}, 200);
+
+	var statsHTML = '<h3>Kills: ' + player.K + '</h3>' +
+			'<h3>Deaths: ' + player.D + '</h3>' +
+			'<h3>Assists: ' + player.A + '</h3>';
+	$('#overviewStats').html(statsHTML)
+			.fadeIn();
+}
+
+function hidePlayerOverview (player){
+	$('#overviewStats').fadeOut();
+}
+

@@ -32,6 +32,9 @@ function openPlayerView (player){
 		document.body.appendChild(script);
 
 		app.injected = true;
+
+		// This actually just shows the profile picture.
+		showPlayerOverview(player);
 	} else {
 		// Do a janky hash-directed refresh.
 		window.location.href = '#'+player.Player+','+player.Hero;
