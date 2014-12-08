@@ -3,19 +3,6 @@
  * the overview in the main page.
  */
 
-var heroToRoleMap = {
-	"Puck": "Offlane",
-	"Keeper of the Light": "Support",
-	"Lycan": "Carry",
-	"Morphling": "Mid",
-	"Io": "Support",
-	"Natures Prophet": "Offlane",
-	"Dazzle": "Support",
-	"Lone Druid": "Carry",
-	"Enigma": "Jungle/Support",
-	"Ember Spirit": "Mid",
-}
-
 var playerToPictureMap = {
 	"Mushi": "Mushi.jpg",
 	"LaNm": "LaNm.png",
@@ -32,29 +19,16 @@ var playerToPictureMap = {
 var currentPlayer = null;
 
 function loadOverview (data){
-	// Convert KDA strings to numbers.
-	data.forEach(function (el){
-		el.K = parseInt(el.K, 10);
-		el.D = parseInt(el.D, 10);
-		el.A = parseInt(el.A, 10);
-	});
-	console.log(data)
-
-	// Split into two teams.
-	var teamNames = _.uniq(data.map(function (el){ return el.Team; }));
-	var firstTeam = data.filter(function (el){ return el.Team === teamNames[0] });
-	var secondTeam = data.filter(function (el){ return el.Team !== teamNames[0] });
-
 	var radius = 35;
 	var thickness = 15;
 	var arc = profileArcGenerator(radius, thickness);
 
 	// Add circles for the first team.
-	$('#firstTeamLabel').text("Team " + teamNames[0]);
+	$('.firstTeamLabel').text("Team " + teamNames[0]);
 	var firstTeamGraphics = addTeamCircleGraphics(firstTeam, 1, arc);
 
 	// Add circles for the second team.
-	$('#secondTeamLabel').text("Team " + teamNames[1]);
+	$('.secondTeamLabel').text("Team " + teamNames[1]);
 	var secondTeamGraphics = addTeamCircleGraphics(secondTeam, 2, arc);
 }
 

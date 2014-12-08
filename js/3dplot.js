@@ -240,10 +240,83 @@ function plot3d(parent, playerName) {
     //setInterval( updateData, defaultDuration );
 }
 
-function launch3DPlot (playerName){
+function launch3DPlot (player){
     // d3.select('html').style('height','100%').style('width','100%');
     // d3.select('body').style('height','100%').style('width','100%');
     // d3.select('#plot').style('width', "600px").style('height', "600px")
-    plot3d(d3.select('#plot'), playerName);
+    // plot3d(d3.select('#plot'), player.Player);
+    
+    var width = 300 + 100, height = 300;
+    
+    var kdaCanvas = $('#kdaCanvas')[0];
+    kdaCanvas.width = width;
+    kdaCanvas.height = height;
+    plotAxes(kdaCanvas, player);
+    plotTriangle(kdaCanvas, player);
+
+    var firstTeamCanvas = $('#firstTeamCanvas')[0];
+    firstTeamCanvas.width = width;
+    firstTeamCanvas.height = height;
+    plotAxes(firstTeamCanvas, {});
+    for (var i=0; i<firstTeam.length; i++){
+        plotTriangle(firstTeamCanvas, firstTeam[i]);
+    }
+
+    var secondTeamCanvas = $('#secondTeamCanvas')[0];
+    secondTeamCanvas.width = width;
+    secondTeamCanvas.height = height;
+    plotAxes(secondTeamCanvas, {});
+    for (i=0; i<secondTeam.length; i++){
+        plotTriangle(secondTeamCanvas, secondTeam[i]);
+    }
 }
 
+function plotAxes (canvas, player){
+    var k = player.K, d = player.D, a = player.A;
+    var w = canvas.width-100, h = canvas.height;
+    var ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'rgb(150,150,150)';
+
+    ctx.beginPath();
+    ctx.moveTo(w/2, h/2);
+    ctx.lineTo(w/2, 0);
+    ctx.stroke();
+    ctx.font = "20px Lato";
+    if (k) ctx.fillText('Kills '+k, (w/2), 20);
+
+    ctx.moveTo(w/2, h/2);
+    ctx.lineTo(0, (h/2)+(w/4));
+    ctx.stroke();
+    if (d) ctx.fillText('Deaths '+d, 0, (3*h/4));
+
+    ctx.moveTo(w/2, h/2);
+    ctx.lineTo(w, (h/2)+(w/4));
+    ctx.stroke();
+    if (a) ctx.fillText('Assists '+a, (w - 30), (3*h/4));
+
+}
+
+/**
+ * Plots a triangle of the player's KDA onto the canvas.
+ * 
+ * @param  {element} canvas     The canvas element to draw upon.
+ * @param  {Object} player      The player whose data is to be drawn.
+ */
+function plotTriangle (canvas, player){
+    var k = player.K, d = player.D, a = player.A;
+    var ks = k / 15, ds = d / 15, as = a / 15;
+    var w = canvas.width-100, h = canvas.height;
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = roleToColorMap[heroToRoleMap[player.Hero]];
+
+    // Filled triangle
+    ctx.beginPath();
+    ctx.moveTo((w/2), (h/2) - (h/2)*ks);                // top
+    ctx.lineTo((w/2) - (w/2)*ds, (h/2) + (w/4)*ds);     // bottom left
+    ctx.lineTo((w/2) + (w/2)*as, (h/2) + (w/4)*as);     // bottom right
+    ctx.fill();
+
+    // // Also do a stroke?
+    // ctx.fillStyle = 'rgba(0,0,0,1)';
+    // ctx.stroke();
+}

@@ -19,11 +19,11 @@
 			<h2 class="gray">Select a player</h2>
 			<br>
 			<div class="leader win">Win</div>
-			<h2 id="firstTeamLabel" class="teamLabel"></h2>
+			<h2 class="firstTeamLabel teamLabel"></h2>
 			<div id="firstTeam" class="teamContainer"></div>
 			<br><br>
 			<div class="leader lose">Lose</div>
-			<h2 id="secondTeamLabel" class="teamLabel"></h2>
+			<h2 class="secondTeamLabel teamLabel"></h2>
 			<div id="secondTeam" class="teamContainer"></div>
 			<div id="overviewStats"></div>
 			<p class="description gray">DoTA 2, or Defense of the Ancients 2, is an online multiplayer game where two teams of five can battle using their heroes to achieve victory.  The data for this visualization comes from datdota.com, in reference to a <a href="http://www.datdota.com/match.php?q=617956329&p=location"> specific match</a> in the StarSeries IX Finals.</p>
@@ -61,7 +61,16 @@
 			<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
         	<br>
         	<br>
-        	<div id="plot"></div>
+        	<div id="plot">
+        		<canvas id="kdaCanvas"></canvas>
+        		<h2 class="firstTeamLabel" class="teamLabel"></h2>
+        		<canvas id="firstTeamCanvas"></canvas>
+        		
+        		
+				<h2 class="secondTeamLabel" class="teamLabel"></h2>
+        		<canvas id="secondTeamCanvas"></canvas>
+
+        	</div>
 		</div>
 
 		<script src="js/d3.min.js"></script>

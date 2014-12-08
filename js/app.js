@@ -22,10 +22,9 @@ loadMatchData(function (){
 
 		// Open the player view.
 		if (playerName.length && hero.length){
-			openPlayerView({
-				Player: x[0],
-				Hero: x[1]
-			}, true);
+			openPlayerView(overallKdaData.filter(function (el){
+				return el.Player === playerName;
+			})[0], true);
 		}
 	}
 
@@ -41,9 +40,9 @@ function openPlayerView (player, fromHash){
 	var duration = fromHash ? 0 : 400;
 	$overview.fadeOut(duration, function (){
 		if (!app.injected){
-			var script = document.createElement('script');
-			script.src = "http://x3dom.org/x3dom/dist/x3dom-full.js";
-			document.body.appendChild(script);
+			// var script = document.createElement('script');
+			// script.src = "http://x3dom.org/x3dom/dist/x3dom-full.js";
+			// document.body.appendChild(script);
 
 			app.injected = true;
 
@@ -62,16 +61,15 @@ function openPlayerView (player, fromHash){
 		$('#hugename').text(player.Player);
 
 		// Launch 3D plot.
-		$('#plot').html('');
-		launch3DPlot(player.Player);
+		launch3DPlot(player);
 		
 		// Launch graph.
 		$('.graphContainer').html('');
-		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#movementContainer");
-		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#goldContainer", "gold");
-		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#killContainer", "blue");
-		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#deathContainer", "red");
-		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#assistContainer", "green");
+		// drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#movementContainer");
+		// drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#goldContainer", "gold");
+		// drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#killContainer", "blue");
+		// drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#deathContainer", "red");
+		// drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#assistContainer", "green");
 
 		$playerView.fadeIn();
 		app.view = 'player';
