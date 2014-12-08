@@ -10,6 +10,11 @@ body{
 	font-weight: 100;
 }
 
+.emphasis{
+	color: black;
+	font-weight: bold;
+}
+
 .axis path, .axis line {
   fill: none;
   stroke: #000;
@@ -36,10 +41,16 @@ body{
 
 .win{
 	background-color: lightgray;
+	left: 0;
+	position: absolute;
+	padding-left: 20px;
 }
 
 .lose{
 	background-color: lightgray;
+	left: 0;
+	position: absolute;
+	padding-left: 17px;
 }
 
 .title{
@@ -53,6 +64,10 @@ body{
 	margin: 0px 0px 10px 0px;
 }
 
+.graphText{
+	font-size: 16px;
+}
+
 #overview{
 	width: 75%;
 	padding: 10px 10px 10px 40px;
@@ -61,6 +76,7 @@ body{
 #playerView{
 	display: none;
 	padding-left: 40px;
+	width: 75%;
 }
 
 .userCircle{
