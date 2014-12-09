@@ -23,7 +23,7 @@ function renderTeamGraphs (player){
     var firstTeamCanvas = $('#firstTeamCanvas')[0];
     firstTeamCanvas.width = width;
     firstTeamCanvas.height = height;
-    plotAxes(firstTeamCanvas, {});
+    plotAxes(firstTeamCanvas, {K: '', D: '', A: ''});
     var selectedPlayers = getSelectedPlayers('#firstTeamSelector', firstTeam);
     for (var i=0; i<selectedPlayers.length; i++){
         plotTriangle(firstTeamCanvas, selectedPlayers[i]);
@@ -35,7 +35,7 @@ function renderTeamGraphs (player){
     var secondTeamCanvas = $('#secondTeamCanvas')[0];
     secondTeamCanvas.width = width;
     secondTeamCanvas.height = height;
-    plotAxes(secondTeamCanvas, {});
+    plotAxes(secondTeamCanvas, {K: '', D: '', A: ''});
     var selectedPlayers = getSelectedPlayers('#secondTeamSelector', secondTeam);
     for (i=0; i<selectedPlayers.length; i++){
         plotTriangle(secondTeamCanvas, selectedPlayers[i]);
@@ -120,17 +120,17 @@ function plotAxes (canvas, player){
     ctx.lineTo(w/2, 0);
     ctx.stroke();
     ctx.font = "20px Lato";
-    if (k) ctx.fillText('Kills '+k, (w/2), 20);
+    if (typeof k !== 'undefined') ctx.fillText('Kills '+k, (w/2), 20);
 
     ctx.moveTo(w/2, h/2);
     ctx.lineTo(0, (h/2)+(w/4));
     ctx.stroke();
-    if (d) ctx.fillText('Deaths '+d, 0, (3*h/4));
+    if (typeof d !== 'undefined') ctx.fillText('Deaths '+d, 0, (3*h/4));
 
     ctx.moveTo(w/2, h/2);
     ctx.lineTo(w, (h/2)+(w/4));
     ctx.stroke();
-    if (a) ctx.fillText('Assists '+a, (w - 30), (3*h/4));
+    if (typeof a !== 'undefined') ctx.fillText('Assists '+a, (w - 30), (3*h/4));
 
 }
 

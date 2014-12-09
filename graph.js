@@ -43,7 +43,6 @@ function drawGraph(hero, team, data, container, color) {
     return ((element["Visible to"]==("Radiant only") || element["Visible to"]=="Both sides") && (element["Hero"]=="Keeper of the Light" || element["Hero"]=="Io") && parseFloat(element["Time"])>.5);
   });
   var baseThreshold;
-  console.log('**', data)
   data = data.filter(function(element){
     baseThreshold = 90;
     return element["X Pos."] > baseThreshold || element["Y Pos."] > baseThreshold
