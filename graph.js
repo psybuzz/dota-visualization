@@ -46,6 +46,7 @@ function drawGraph(hero, team, data, container, color) {
       curY = parseFloat(d["Y Pos."]);
       d["distance"] = 0;
     }
+
     if (d.Hero == hero && time >= .50){
       preX = curX;
       preY = curY;

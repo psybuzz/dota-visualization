@@ -32,36 +32,44 @@
 			<div class="huge gray" id="hugename"></div>
 			<br><br>
 			<ul class="viewTabs">
-				<li class="tab selected">Charts</li>
-				<li class="tab">Role counterpart comparison</li>
-				<li class="tab">Team comparison</li>
+				<li class="tab selected" id="chartsTab">Charts</li>
+				<li class="tab" id="roleTab">Role counterpart comparison</li>
+				<li class="tab" id="teamTab">Team comparison</li>
 			</ul>
-			<h2 class="gray">Movement throughout the game</h2>
-        	<div id="movementContainer" class="graphContainer"></div>
-        	<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
-        	<br>
-        	<br>
-        	<h2 class="gray">Gold earned</h2>
-			<div id="goldContainer" class="graphContainer"></div>
-			<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
-        	<br>
-        	<br>
-			<h2 class="gray">Kills</h2>
-			<div id="killContainer" class="graphContainer"></div>
-			<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
-        	<br>
-        	<br>
-			<h2 class="gray">Deaths</h2>
-			<div id="deathContainer" class="graphContainer"></div>
-			<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
-        	<br>
-        	<br>
-			<h2 class="gray">Assists</h2>
-			<div id="assistContainer" class="graphContainer"></div>
-			<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
-        	<br>
-        	<br>
-        	<div id="plot"></div>
+			<div class="detail selected" id="graphDiv">
+				<h2 class="gray">Movement throughout the game</h2>
+	        	<div id="movementContainer" class="graphContainer"></div>
+	        	<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
+	        	<br>
+	        	<br>
+	        	<h2 class="gray">Gold earned</h2>
+				<div id="goldContainer" class="graphContainer"></div>
+				<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
+	        	<br>
+	        	<br>
+				<h2 class="gray">Kills</h2>
+				<div id="killContainer" class="graphContainer"></div>
+				<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
+	        	<br>
+	        	<br>
+				<h2 class="gray">Deaths</h2>
+				<div id="deathContainer" class="graphContainer"></div>
+				<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
+	        	<br>
+	        	<br>
+				<h2 class="gray">Assists</h2>
+				<div id="assistContainer" class="graphContainer"></div>
+				<p class="graphText">This player moved across <span class="emphasis">20.6 percent</span> of the map, on average, at any given minute of gameplay.  It is likely that he used <span class="emphasis">13</span> teleportation skills and went back to the base at least <span class="emphasis">3</span> times.</p>
+	        	<br>
+	        	<br>
+	        	<div id="plot"></div>
+	        </div>
+	        <div class="detail" id="roleDiv">
+	        	This is the role Div
+	        </div>
+	        <div class="detail" id="teamDiv">
+	        	This is the team Div
+	        </div>
 		</div>
 
 		<script src="js/d3.min.js"></script>
@@ -72,6 +80,6 @@
         <script type="text/javascript" src="js/3dplot.js"></script>
         <script src="js/data.js"></script>
 		<script src="js/app.js"></script>
-
+		<script src="js/playerDetail.js"></script>
 	</body>
 </html>
