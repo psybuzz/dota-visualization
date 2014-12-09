@@ -12,7 +12,7 @@ function drawGraph(hero, team, data, container, color) {
       width = window.innerWidth * 0.75 - margin.left - margin.right,
       height = 200 - margin.top - margin.bottom;
 
-  var preX, preY, curX, curY = 0;
+  var preX = 0, preY = 0, curX = 0, curY = 0;
 
   var x = d3.scale.linear()
       .range([0, width]);
@@ -88,13 +88,14 @@ function drawGraph(hero, team, data, container, color) {
   var dataNest = d3.nest()
         .key(function(d) {return d.Hero;})
         .entries(data);
+        // console.log('**', dataNest)
     // Loop through each symbol / key
     dataNest.forEach(function(d) {
-      console.log(d.values[0])
+      // console.log(d.values[0])
         var path = svg.append("path")
             .attr("class", "line")
             .attr("d", line(d.values));
-        path.style("stroke", color); 
+        path.style("stroke", "rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")"); 
 
     });
 
