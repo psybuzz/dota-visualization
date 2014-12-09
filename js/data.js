@@ -1,4 +1,5 @@
 var overallKdaData, positionData, gpmData, killData, deathData, assistData;
+var playerToGPMMap = {}, playerToKPMMap = {}, playerToDPMMap = {}, playerToAPMMap = {};
 
 var heroToOpposingHero = {
 	"Puck": "Natures Prophet",
@@ -71,18 +72,47 @@ function loadMatchData (callback){
             d3.csv("GPMFivesData.csv", function (error, data) {
                 gpmData = data;
                 gpmData.Time = [0, 5, 10, 15, 20, 25, 30, 35];
+                gpmData.map(function (player){
+	                var sum = gpmData.Time.reduce(function (t1, t2){
+	                	return t1+parseFloat(player[t2]);
+	                }, 0);
+	                var avg = sum / 31.75;
+	                playerToGPMMap[player.Player] = avg;
+                });
 
                 d3.csv("KillsFivesData.csv", function(error, data) {
                     killData = data;
                     killData.Time = [0, 5, 10, 15, 20, 25, 30, 35];
+                    killData.map(function (player){
+		                var sum = killData.Time.reduce(function (t1, t2){
+		                	return t1+parseFloat(player[t2]);
+		                }, 0);
+		                var avg = sum / 31.75;
+		                playerToKPMMap[player.Player] = avg;
+	                });
 
                     d3.csv("DeathesFivesData.csv", function(error, data) {
                         deathData = data;
                         deathData.Time = [0, 5, 10, 15, 20, 25, 30, 35];
+                        deathData.map(function (player){
+			                var sum = deathData.Time.reduce(function (t1, t2){
+			                	return t1+parseFloat(player[t2]);
+			                }, 0);
+			                var avg = sum / 31.75;
+			                playerToDPMMap[player.Player] = avg;
+		                });
 
                         d3.csv("AssistsFivesData.csv", function(error, data) {
                             assistData = data;
                             assistData.Time = [0, 5, 10, 15, 20, 25, 30, 35];
+                            assistData.map(function (player){
+				                var sum = assistData.Time.reduce(function (t1, t2){
+				                	return t1+parseFloat(player[t2]);
+				                }, 0);
+				                var avg = sum / 31.75;
+				                playerToAPMMap[player.Player] = avg;
+			                });
+
                             callback();
                         });
                     });

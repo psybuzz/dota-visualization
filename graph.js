@@ -183,3 +183,19 @@ function drawOtherGraph(hero, team, data, container, color, text) {
         path.style("stroke", color);
     }
 }
+
+function loadGraphDescriptions (player){
+  var playerName = player.Player;
+  $('#moveText').html(playerName + " moved around quite a bit throughout the game.  Times when "+playerName+" returned to the base were excluded, so all of the major spikes in this graph indicate points when "+playerName+" teleported.  Such feats can be accomplished with a teleport (TP) scroll.");
+  $('#goldText').html(getActionText('earned gold at rate of', playerToGPMMap[playerName]));
+  $('#killText').html(getActionText('killed enemies', playerToKPMMap[playerName]));
+  $('#deathText').html(getActionText('died', playerToDPMMap[playerName]));
+  $('#assistText').html(getActionText('assisted allies', playerToAPMMap[playerName]));
+}
+
+function getActionText (actioned, avg) {
+  var avg = Math.floor(avg * 100) / 100;
+  var html = 'This player '+actioned+' <span class="emphasis">'+avg+'</span> per minute, on average at any given minute of gameplay.';
+  return html;
+}
+
