@@ -113,7 +113,12 @@ function drawOtherGraph(hero, team, data, container, color) {
 
     var prev, cur = 0;
     var graphData = [], graphDataGold = [];
-    graphData["Time"] = data.Time;
+    //graphData["Time"] = data.Time;
+
+    for(var i = 0; i < data.Time.length; i++) {
+        graphData[i] = {};
+        graphData[i].Time = data.Time[i];
+    }
     var x = d3.scale.linear()
         .range([0, width]);
 
@@ -144,15 +149,16 @@ function drawOtherGraph(hero, team, data, container, color) {
             data.Time.forEach(function (t) {
                 prev = cur;
                 cur = parseFloat(d[t]);
-                graphDataGold[t/5 - 1] = cur;
+                graphData[t/5 - 1].Data = cur;
+                //graphDataGold[t/5 - 1] = cur;
             });
         }
     });
-    graphData["Data"] = graphDataGold;
+    //graphData["Data"] = graphDataGold;
     console.log(graphData);
 
-    x.domain(d3.extent(graphData.Time));
-    y.domain(d3.extent(graphData.Data));
+    x.domain(d3.extent(graphData, function(d) { return parseFloat(d.Time); }));
+    y.domain(d3.extent(graphData, function(d) { return parseFloat(d.Data); }));
 
     svg.append("g")
         .attr("class", "x axis")
