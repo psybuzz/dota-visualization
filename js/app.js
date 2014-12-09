@@ -67,10 +67,10 @@ function openPlayerView (player, fromHash){
 		// Launch graph.
 		$('.graphContainer').html('');
 		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#movementContainer");
-		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#goldContainer", "gold");
-		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#killContainer", "blue");
-		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#deathContainer", "red");
-		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#assistContainer", "green");
+		drawOtherGraph(player.Hero, heroToSideMap[player.Hero], gpmData, "#goldContainer", "gold", "Gold(g)");
+		drawOtherGraph(player.Hero, heroToSideMap[player.Hero], killData, "#killContainer", "blue", "Kills");
+		drawOtherGraph(player.Hero, heroToSideMap[player.Hero], deathData, "#deathContainer", "red", "Deaths");
+		drawOtherGraph(player.Hero, heroToSideMap[player.Hero], assistData, "#assistContainer", "green", "Assists");
 
 		$playerView.fadeIn();
 		app.view = 'player';

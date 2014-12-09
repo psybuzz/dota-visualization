@@ -125,7 +125,7 @@ function drawGraph(hero, team, data, container, color) {
 
 }
 
-function drawOtherGraph(hero, team, data, container, color) {
+function drawOtherGraph(hero, team, data, container, color, text) {
     console.log(data);
     var margin = {top: 5, right: 50, bottom: 30, left: 25},
         width = window.innerWidth * 0.75 - margin.left - margin.right,
@@ -193,7 +193,7 @@ function drawOtherGraph(hero, team, data, container, color) {
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Movement");
+        .text(text);
 
     var path = svg.append("path")
         .datum(graphData)
