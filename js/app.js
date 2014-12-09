@@ -67,6 +67,7 @@ function openPlayerView (player, fromHash){
 		// Launch graph.
 		$('.graphContainer').html('');
 		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#movementContainer");
+		drawComparisonGraph(player.Hero, heroToOpposingHero[player.Hero], positionData, "#comparisonContainer", "green", "red")
 		drawOtherGraph(player.Hero, heroToSideMap[player.Hero], gpmData, "#goldContainer", "gold", "Gold(g)");
 		drawOtherGraph(player.Hero, heroToSideMap[player.Hero], killData, "#killContainer", "blue", "Kills");
 		drawOtherGraph(player.Hero, heroToSideMap[player.Hero], deathData, "#deathContainer", "red", "Deaths");

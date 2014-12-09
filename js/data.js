@@ -1,5 +1,18 @@
 var overallKdaData, positionData, gpmData, killData, deathData, assistData;
 
+var heroToOpposingHero = {
+	"Puck": "Natures Prophet",
+	"Keeper of the Light": "Dazzle",
+	"Lycan": "Lone Druid",
+	"Morphling": "Ember Spirit",
+	"Io": "Enigma",
+	"Natures Prophet": "Puck",
+	"Dazzle": "Keeper of the Light",
+	"Lone Druid": "Lycan",
+	"Ember Spirit": "Morphling",
+	"Enigma": "Io"
+}
+
 var heroToSideMap = {
 	"Puck": "Radiant",
 	"Keeper of the Light": "Radiant",
@@ -57,19 +70,19 @@ function loadMatchData (callback){
 
             d3.csv("GPMFivesData.csv", function (error, data) {
                 gpmData = data;
-                gpmData.Time = [5, 10, 15, 20, 25, 30, 35];
+                gpmData.Time = [0, 5, 10, 15, 20, 25, 30, 35];
 
                 d3.csv("KillsFivesData.csv", function(error, data) {
                     killData = data;
-                    killData.Time = [5, 10, 15, 20, 25, 30, 35];
+                    killData.Time = [0, 5, 10, 15, 20, 25, 30, 35];
 
                     d3.csv("DeathesFivesData.csv", function(error, data) {
                         deathData = data;
-                        deathData.Time = [5, 10, 15, 20, 25, 30, 35];
+                        deathData.Time = [0, 5, 10, 15, 20, 25, 30, 35];
 
                         d3.csv("AssistsFivesData.csv", function(error, data) {
                             assistData = data;
-                            assistData.Time = [5, 10, 15, 20, 25, 30, 35];
+                            assistData.Time = [0, 5, 10, 15, 20, 25, 30, 35];
                             callback();
                         });
                     });
