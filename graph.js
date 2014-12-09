@@ -39,7 +39,33 @@ function drawGraph(hero, team, data, container, color) {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  data.forEach(function(d) {
+  data = data.filter(function(element){
+    return ((element["Visible to"]==("Radiant only") || element["Visible to"]=="Both sides") && (element["Hero"]=="Keeper of the Light" || element["Hero"]=="Io") && parseFloat(element["Time"])>.5);
+  });
+  var baseThreshold;
+  data = data.filter(function(element){
+    baseThreshold = 90;
+    return element["X Pos."] > baseThreshold && element["Y Pos."] > baseThreshold
+  });
+
+  dataHero1 = data.filter(function(element){
+    return element["Hero"] == "Keeper of the Light"
+  });
+
+  dataHero2 = data.filter(function(element){
+    return element["Hero"] == "Io"
+  })
+
+  dataHero1 = dataHero1.sort(function(a,b){
+    return parseFloat(a["Time"])-parseFloat(b["Time"]);
+  });
+
+  dataHero2 = dataHero2.sort(function(a,b){
+    return parseFloat(a["Time"])-parseFloat(b["Time"]);
+  });
+
+  data = dataHero1.concat(dataHero2);
+    data.forEach(function(d) {
     var time = parseFloat(d.Time);
     if (time < .5) {
       curX = parseFloat(d["X Pos."]);
@@ -47,7 +73,7 @@ function drawGraph(hero, team, data, container, color) {
       d["distance"] = 0;
     }
 
-    if (d.Hero == hero && time >= .50){
+    if (time >= .50){
       preX = curX;
       preY = curY;
       curX = parseFloat(d["X Pos."]);
@@ -56,27 +82,21 @@ function drawGraph(hero, team, data, container, color) {
     }
   });
 
-
-  data = data.filter(function(element){
-    return ((element["Visible to"]==(team+" only") || element["Visible to"]=="Both sides") && element["Hero"]==hero && parseFloat(element["Time"])>.5);
-  });
-  var baseThreshold;
-  data = data.filter(function(element){
-  if (team == "Radiant") {
-    baseThreshold = 90;
-    return element["X Pos."] > baseThreshold && element["Y Pos."] > baseThreshold
-  }
-  else {
-    baseThreshold = 165;
-    return element["X Pos."] < baseThreshold && element["Y Pos."] < baseThreshold
-  }});
-
-  data = data.sort(function(a,b){
-    return parseFloat(a["Time"])-parseFloat(b["Time"]);
-  });
-
   x.domain(d3.extent(data, function(d) { return parseFloat(d.Time); }));
   y.domain(d3.extent(data, function(d) { return d.distance; }));
+
+  var dataNest = d3.nest()
+        .key(function(d) {return d.Hero;})
+        .entries(data);
+    // Loop through each symbol / key
+    dataNest.forEach(function(d) {
+      console.log(d.values[0])
+        var path = svg.append("path")
+            .attr("class", "line")
+            .attr("d", line(d.values));
+        path.style("stroke", color); 
+
+    });
 
   svg.append("g")
       .attr("class", "x axis")
@@ -93,12 +113,12 @@ function drawGraph(hero, team, data, container, color) {
       .style("text-anchor", "end")
       .text("Movement");
 
-  var path = svg.append("path")
+  /*var path = svg.append("path")
         .datum(data)
         .attr("class", "line")
         .attr("d", line);
 
   if (color){
     path.style("stroke", color);
-  }
+  }*/
 }
