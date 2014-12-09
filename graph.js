@@ -43,9 +43,10 @@ function drawGraph(hero, team, data, container, color) {
     return ((element["Visible to"]==("Radiant only") || element["Visible to"]=="Both sides") && (element["Hero"]=="Keeper of the Light" || element["Hero"]=="Io") && parseFloat(element["Time"])>.5);
   });
   var baseThreshold;
+  console.log('**', data)
   data = data.filter(function(element){
     baseThreshold = 90;
-    return element["X Pos."] > baseThreshold && element["Y Pos."] > baseThreshold
+    return element["X Pos."] > baseThreshold || element["Y Pos."] > baseThreshold
   });
 
   dataHero1 = data.filter(function(element){
@@ -65,7 +66,7 @@ function drawGraph(hero, team, data, container, color) {
   });
 
   data = dataHero1.concat(dataHero2);
-    data.forEach(function(d) {
+  data.forEach(function(d) {
     var time = parseFloat(d.Time);
     if (time < .5) {
       curX = parseFloat(d["X Pos."]);
@@ -81,6 +82,7 @@ function drawGraph(hero, team, data, container, color) {
       d["distance"]=distance(preX, preY, curX, curY);
     }
   });
+  data = data.slice(1); // ignore the first.
 
   x.domain(d3.extent(data, function(d) { return parseFloat(d.Time); }));
   y.domain(d3.extent(data, function(d) { return d.distance; }));
