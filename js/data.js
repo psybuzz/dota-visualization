@@ -1,5 +1,6 @@
 var overallKdaData;
 var positionData;
+var gpmData;
 
 var heroToSideMap = {
 	"Puck": "Radiant",
@@ -34,7 +35,12 @@ function loadMatchData (callback){
 
 		d3.csv("datdotaMatch617956329.csv", function (error, data){
 			positionData = data;
-			callback();
+
+            d3.csv("GPMFivesData.csv", function (error, data) {
+                gpmData = data;
+                gpmData.Time = [5, 10, 15, 20, 25, 30, 35];
+			    callback();
+            });
 		});
 	});
 }
