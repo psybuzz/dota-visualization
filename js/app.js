@@ -39,6 +39,7 @@ function openPlayerView (player, fromHash){
 	// Transition to new view.
 	var duration = fromHash ? 0 : 400;
 	$overview.fadeOut(duration, function (){
+		window.location.href = '#'+player.Player+','+player.Hero;
 		if (!app.injected){
 			// var script = document.createElement('script');
 			// script.src = "http://x3dom.org/x3dom/dist/x3dom-full.js";
@@ -51,8 +52,8 @@ function openPlayerView (player, fromHash){
 		} else {
 			// If we've already injected, we need a fresh context.  Do a janky
 			// hash-directed refresh.
-			window.location.href = '#'+player.Player+','+player.Hero;
-			window.location.reload();
+			// window.location.href = '#'+player.Player+','+player.Hero;
+			// window.location.reload();
 
 			return;
 		}
@@ -65,11 +66,11 @@ function openPlayerView (player, fromHash){
 		
 		// Launch graph.
 		$('.graphContainer').html('');
-		// drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#movementContainer");
-		// drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#goldContainer", "gold");
-		// drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#killContainer", "blue");
-		// drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#deathContainer", "red");
-		// drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#assistContainer", "green");
+		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#movementContainer");
+		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#goldContainer", "gold");
+		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#killContainer", "blue");
+		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#deathContainer", "red");
+		drawGraph(player.Hero, heroToSideMap[player.Hero], positionData, "#assistContainer", "green");
 
 		$playerView.fadeIn();
 		app.view = 'player';

@@ -1,18 +1,27 @@
 $("#chartsTab").click(function(){
 	$("#roleDiv").fadeOut();
-	$("#teamDiv").fadeOut();
-	$("#graphDiv").fadeIn();
+	$("#teamDiv").fadeOut(function (){
+		$("#graphDiv").fadeIn();
+	});
+	$(".tab").removeClass("selected");
+	$(this).addClass("selected");
 });
 
 $("#roleTab").click(function(){
 	$("#graphDiv").fadeOut();
-	$("#teamDiv").fadeOut();
-	$("#roleDiv").fadeIn();
+	$("#teamDiv").fadeOut(function (){
+		$("#roleDiv").fadeIn();
+	});
+	$(".tab").removeClass("selected");
+	$(this).addClass("selected");
 });
 
 $("#teamTab").click(function(){
 	$("#graphDiv").fadeOut();
-	$("#roleDiv").fadeOut();
-	$("#teamDiv").fadeIn();
+	$("#roleDiv").fadeOut(function (){
+		$("#teamDiv").fadeIn();
+	});
+	$(".tab").removeClass("selected");
+	$(this).addClass("selected");
 });
 
