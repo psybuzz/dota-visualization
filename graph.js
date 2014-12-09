@@ -65,6 +65,7 @@ function drawGraph(hero, team, data, container, color) {
   });
 
   data = dataHero1.concat(dataHero2);
+
     data.forEach(function(d) {
     var time = parseFloat(d.Time);
     if (time < .5) {
@@ -90,7 +91,7 @@ function drawGraph(hero, team, data, container, color) {
         .entries(data);
     // Loop through each symbol / key
     dataNest.forEach(function(d) {
-      console.log(d.values[0])
+      console.log(d)
         var path = svg.append("path")
             .attr("class", "line")
             .attr("d", line(d.values));
