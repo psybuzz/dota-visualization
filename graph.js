@@ -92,7 +92,7 @@ function drawGraph(hero, team, data, container, color) {
         // console.log('**', dataNest)
     // Loop through each symbol / key
     dataNest.forEach(function(d) {
-      // console.log(d.values[0])
+       console.log(d.values)
         var path = svg.append("path")
             .attr("class", "line")
             .attr("d", line(d.values));
