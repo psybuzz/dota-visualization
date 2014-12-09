@@ -207,6 +207,23 @@ body{
 	display: none;
 }
 
+.legend{
+	opacity: 0.7;
+	padding: 2px 10px;
+	color: white;
+	margin: 2px;
+}
+
+.legend.blue{
+	background-color: darkblue;
+}
+.legend.green{
+	background-color: darkgreen;
+}
+.legend.red{
+	background-color: darkred;
+}
+
 
 @media all and (max-width: 550px){
 	body{
