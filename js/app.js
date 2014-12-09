@@ -72,6 +72,9 @@ function openPlayerView (player, fromHash){
 		drawOtherGraph(player.Hero, heroToSideMap[player.Hero], deathData, "#deathContainer", "red", "Deaths");
 		drawOtherGraph(player.Hero, heroToSideMap[player.Hero], assistData, "#assistContainer", "green", "Assists");
 
+		// Load graph descriptions.
+		loadGraphDescriptions(player);
+
 		$playerView.fadeIn();
 		app.view = 'player';
 	});
