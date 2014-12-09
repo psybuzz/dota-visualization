@@ -1,6 +1,4 @@
-var overallKdaData;
-var positionData;
-var gpmData;
+var overallKdaData, positionData, gpmData, killData, deathData, assistData;
 
 var heroToSideMap = {
 	"Puck": "Radiant",
@@ -60,7 +58,22 @@ function loadMatchData (callback){
             d3.csv("GPMFivesData.csv", function (error, data) {
                 gpmData = data;
                 gpmData.Time = [5, 10, 15, 20, 25, 30, 35];
-			    callback();
+
+                d3.csv("KillsFivesData.csv", function(error, data) {
+                    killData = data;
+                    killData.Time = [5, 10, 15, 20, 25, 30, 35];
+
+                    d3.csv("DeathesFivesData.csv", function(error, data) {
+                        deathData = data;
+                        deathData.Time = [5, 10, 15, 20, 25, 30, 35];
+
+                        d3.csv("AssistsFivesData.csv", function(error, data) {
+                            assistData = data;
+                            assistData.Time = [5, 10, 15, 20, 25, 30, 35];
+                            callback();
+                        });
+                    });
+                });
             });
 		});
 	});
