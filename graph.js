@@ -171,7 +171,7 @@ function drawOtherGraph(hero, team, data, container, color, text) {
             data.Time.forEach(function (t) {
                 prev = cur;
                 cur = parseFloat(d[t]);
-                graphData[t/5 - 1].Data = cur;
+                graphData[t/5].Data = cur;
                 //graphDataGold[t/5 - 1] = cur;
             });
         }
