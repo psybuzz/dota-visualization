@@ -55,7 +55,7 @@ function openPlayerView (player, fromHash){
 			// window.location.href = '#'+player.Player+','+player.Hero;
 			// window.location.reload();
 
-			return;
+			// return;
 		}
 
 		// Set the huge name.
